@@ -10,6 +10,5 @@ npm run dev
 yarn dev
 ```
 
-```
-![alt text](https://imgur.com/NygbmOo)
-```
+
+![alt text](https://github.com/Dunkaroos91/reddit-clone/blob/main/RedditCone.PNG?raw=true)
