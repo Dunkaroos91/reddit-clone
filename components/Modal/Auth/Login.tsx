@@ -25,7 +25,7 @@ const Login: React.FC<LoginProps> = () => {
 
 
     //Firebase logic
-    const onSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         signInWithEmailAndPassword(loginForm.email, loginForm.password)

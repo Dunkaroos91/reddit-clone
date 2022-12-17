@@ -1,10 +1,8 @@
-import { Alert, AlertDescription, AlertIcon, AlertTitle, Flex, Icon, Text } from '@chakra-ui/react';
+import { Alert, AlertIcon, Flex, Icon, Text } from '@chakra-ui/react';
 import React, { useState } from 'react'
 import { BiPoll } from "react-icons/bi";
 import { BsLink45Deg, BsMic } from "react-icons/bs";
 import { IoDocumentText, IoImageOutline } from "react-icons/io5";
-import { AiFillCloseCircle } from "react-icons/ai";
-import TabItem from './TabItem';
 import TextInputs from './PostForm/TextInputs';
 import ImageUpload from './PostForm/ImageUpload';
 import { Post } from '../../atoms/postsAtom';
@@ -14,15 +12,10 @@ import { addDoc, collection, serverTimestamp, Timestamp, updateDoc } from 'fireb
 import { firestore, storage } from '../../firebase/clientApp';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 import useSelectFile from '../../hooks/useSelectFile';
-
-type NewPostFormProps = {
-    user: User;
-    communityImageURL?: string;
-    communityId: string;
-}
+import TabItem from './TabItem';
 
 
-const formTabs: TabItem[] = [
+const formTabs = [
     {
         title: 'Post',
         icon: IoDocumentText
@@ -45,12 +38,16 @@ const formTabs: TabItem[] = [
     },
 ];
 
-export type TabItem = {
-    title: string;
-    icon: typeof Icon.arguments;
-}
 
-const NewPostForm: React.FC<NewPostFormProps> = ({ user, communityImageURL }) => {
+
+type NewPostFormProps = {
+    user: User;
+    communityImageURL?: string;
+    communityId?: string;
+};
+
+
+const NewPostForm: React.FC<NewPostFormProps> = ({ user, communityImageURL, communityId }) => {
     const router = useRouter();
 
     const [selectedTab, setSelectedTab] = useState(formTabs[0].title);
@@ -59,8 +56,6 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user, communityImageURL }) =>
         title: '',
         body: '',
     });
-
-
 
     const { selectedFile, setSelectedFile, onSelectFile } = useSelectFile();
 
@@ -124,12 +119,13 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user, communityImageURL }) =>
     return (
         <Flex direction='column' bg='white' borderRadius={4} mt={2}>
             <Flex width='100%'>
-                {formTabs.map(item => (
+                {formTabs.map((item, index) => (
                     <TabItem
-                        key={item.title}
+                        key={index}
                         item={item}
                         selected={item.title === selectedTab}
-                        setSelectedTab={setSelectedTab} />
+                        setSelectedTab={setSelectedTab}
+                    />
                 ))}
             </Flex>
             <Flex p={4}>
