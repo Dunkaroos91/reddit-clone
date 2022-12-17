@@ -9,4 +9,7 @@ npm run dev
 # or
 yarn dev
 ```
+
+```
 ![alt text](https://imgur.com/NygbmOo)
+```
