@@ -50,8 +50,11 @@ const PostItem: React.FC<PostItemProps> = ({ post, userIsCreator, userVoteValue,
             }
         } catch (error: any) {
             setError(error.message);
+        } finally {
+            setLoadingDelete(false);
         }
-        setLoadingDelete(false);
+
+
     }
 
     return (
